@@ -1,6 +1,13 @@
 #!/home/thatguy/MyRepos/Python/mirkotik-leases/bin/python3
 from routeros_api import RouterOsApiPool
-connection = RouterOsApiPool('192.168.8.1',username='admin',password='1248',plaintext_login=True)
+from dotenv import load_dotenv
+import os 
+load_dotenv()
+USERNAME = os.getenv('USERNAME')
+IP_ADDRESS= os.getenv('IP_ADDRESS')
+PASSWORD = os.getenv('PASSWORD')
+print(IP_ADDRESS)
+connection = RouterOsApiPool(IP_ADDRESS,username=USERNAME,password=PASSWORD,plaintext_login=True)
 
 
 api = connection.get_api()
