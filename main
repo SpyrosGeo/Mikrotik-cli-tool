@@ -1,0 +1,15 @@
+#!/home/thatguy/MyRepos/Python/mirkotik-leases/bin/python3
+from routeros_api import RouterOsApiPool
+connection = RouterOsApiPool('192.168.8.1',username='admin',password='1248',plaintext_login=True)
+
+
+api = connection.get_api()
+
+lease_list = api.get_resource('ip/dhcp-server/lease')
+lease_list = lease_list.get()
+for item in lease_list:
+    hostname = item.get('host-name')
+    ip_address = item.get('address')
+    mac_address = item.get('mac-address')
+    print (f"IP: {ip_address}, hostName: {hostname if hostname else 'Null'}, MAC: {mac_address}")
+    
